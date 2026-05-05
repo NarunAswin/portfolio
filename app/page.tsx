@@ -7,13 +7,18 @@ import Experience from "@/components/sections/Experience";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
 import ScrollProgress from "@/components/ui/ScrollProgress";
+import AmbientBackground from "@/components/ui/AmbientBackground";
 
 export default function Home() {
   return (
-    <main style={{ background: "#0b1326", minHeight: "100vh" }}>
+    <main
+      className="relative overflow-hidden"
+      style={{ background: "#0b1326", minHeight: "100vh" }}
+    >
+      <AmbientBackground />
       <ScrollProgress />
       <Navbar />
-      <div className="pt-16">
+      <div className="pt-16 relative z-10">
         <Hero />
         <About />
         <TechStack />

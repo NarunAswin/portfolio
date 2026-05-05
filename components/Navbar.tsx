@@ -20,47 +20,73 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      className="glass-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-      style={{
-        height: scrolled ? "56px" : "64px",
-        boxShadow: scrolled ? "0 8px 32px rgba(0,0,0,0.4)" : "none",
-      }}
-    >
-      <div className="max-w-6xl mx-auto px-6 h-full flex items-center justify-between">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="font-label text-sm tracking-widest text-[#c0c1ff] hover:text-white transition-colors relative group"
-        >
-          NAK
-          <span
-            className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#6366f1] transition-all duration-300 group-hover:w-full"
-          />
-        </Link>
+    <header className="fixed top-4 left-0 right-0 z-50 px-4">
+      <div
+        className="max-w-6xl mx-auto rounded-full transition-all duration-300"
+        style={{
+          background: "rgba(22, 30, 52, 0.85)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          boxShadow: scrolled
+            ? "0 16px 40px rgba(0,0,0,0.45)"
+            : "0 10px 28px rgba(0,0,0,0.3)",
+        }}
+      >
+        <div className="h-14 px-4 sm:px-5 flex items-center justify-between gap-4">
+          {/* Minimal brand icon */}
+          <Link
+            href="/"
+            className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+            style={{
+              background: "linear-gradient(135deg,#1f4ea8,#315ed0)",
+              border: "1px solid rgba(255,255,255,0.22)",
+            }}
+            aria-label="Home"
+          >
+            <span className="text-white text-sm font-semibold">N</span>
+          </Link>
 
-        {/* Nav links */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className="relative group text-sm font-medium text-[#c7c4d7] hover:text-white transition-colors"
+          {/* Center links */}
+          <nav className="hidden md:flex items-center gap-7">
+            {navLinks.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="text-sm text-[#c7c4d7] hover:text-white transition-colors"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right actions */}
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              aria-label="Theme"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-[#c7c4d7] hover:text-white transition-colors"
+              style={{ background: "rgba(255,255,255,0.06)" }}
             >
-              {label}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#6366f1] transition-all duration-300 group-hover:w-full" />
+              <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>
+                dark_mode
+              </span>
+            </button>
+            <Link
+              href="/#contact"
+              className="h-9 px-4 rounded-full flex items-center gap-1.5 text-sm font-medium text-white transition-all hover:brightness-110"
+              style={{
+                background: "linear-gradient(135deg,#1f4ea8,#315ed0)",
+                border: "1px solid rgba(255,255,255,0.22)",
+              }}
+            >
+              Contact us
+              <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>
+                north_east
+              </span>
             </Link>
-          ))}
-        </nav>
-
-        {/* CTA */}
-        <a
-          href="mailto:hello@narunaswin.com"
-          className="btn-primary text-sm py-2 px-5"
-          style={{ animation: "none" }}
-        >
-          Hire Me
-        </a>
+          </div>
+        </div>
       </div>
     </header>
   );

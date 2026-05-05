@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import GlassCard from "@/components/ui/GlassCard";
 import TechBadge from "@/components/ui/TechBadge";
 import AnimateIn from "@/components/ui/AnimateIn";
+import AmbientBackground from "@/components/ui/AmbientBackground";
 
 const stack = ["React", "TypeScript", "D3.js", "Supabase", "Tailwind CSS", "Vercel"];
 
@@ -102,9 +103,13 @@ const channel = supabase
 
 export default function SustainabilityPlatformPage() {
   return (
-    <main style={{ background: "#0b1326", minHeight: "100vh" }}>
+    <main
+      className="relative overflow-hidden"
+      style={{ background: "#0b1326", minHeight: "100vh" }}
+    >
+      <AmbientBackground />
       <Navbar />
-      <div className="pt-16">
+      <div className="pt-16 relative z-10">
 
         {/* Hero */}
         <section className="relative section-gap px-6 overflow-hidden">

@@ -12,7 +12,11 @@ export default function GlassCard({
 }: GlassCardProps) {
   return (
     <div
-      className={`glass-card ${hover ? "transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-indigo-500/20" : ""} ${className}`}
+      className={`glass-card ${
+        hover
+          ? "transition-all duration-300"
+          : ""
+      } ${className}`}
       {...props}
     >
       {children}

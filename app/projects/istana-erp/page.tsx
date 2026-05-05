@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GlassCard from "@/components/ui/GlassCard";
 import TechBadge from "@/components/ui/TechBadge";
+import AmbientBackground from "@/components/ui/AmbientBackground";
 
 const stack = ["Next.js 14", "TypeScript", "Prisma", "PostgreSQL"];
 
@@ -93,9 +94,13 @@ const codeSnippet = `export const updateStockLevel = async (id: string, quantity
 
 export default function IstanaERPPage() {
   return (
-    <main style={{ background: "#0b1326", minHeight: "100vh" }}>
+    <main
+      className="relative overflow-hidden"
+      style={{ background: "#0b1326", minHeight: "100vh" }}
+    >
+      <AmbientBackground />
       <Navbar />
-      <div className="pt-16">
+      <div className="pt-16 relative z-10">
         {/* Hero */}
         <section className="relative section-gap px-6 overflow-hidden">
           <div

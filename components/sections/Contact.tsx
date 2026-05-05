@@ -1,5 +1,8 @@
 "use client";
 
+import type { FormEvent } from "react";
+import { useState } from "react";
+import { toast } from "sonner";
 import GlassCard from "@/components/ui/GlassCard";
 import AnimateIn from "@/components/ui/AnimateIn";
 
@@ -7,14 +10,14 @@ const contactInfo = [
   {
     icon: "mail",
     label: "Email",
-    value: "hello@narunaswin.com",
-    href: "mailto:hello@narunaswin.com",
+    value: "narunaswin@gmail.com",
+    href: "mailto:narunaswin@gmail.com",
   },
   {
     icon: "call",
     label: "Phone",
-    value: "+91 98765 43210",
-    href: "tel:+919876543210",
+    value: "+91 9789070669",
+    href: "tel:+919789070669",
   },
   {
     icon: "location_on",
@@ -25,6 +28,43 @@ const contactInfo = [
 ];
 
 export default function Contact() {
+  const [isSending, setIsSending] = useState(false);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formEl = e.currentTarget;
+    const formData = new FormData(formEl);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const subject = String(formData.get("subject") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    setIsSending(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, subject, message }),
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || "Failed to send email.");
+      }
+
+      toast.success("Message sent to narunaswin@gmail.com successfully.");
+      formEl.reset();
+    } catch (err) {
+      toast.error(
+        err instanceof Error ? err.message : "Something went wrong."
+      );
+    } finally {
+      setIsSending(false);
+    }
+  };
+
   return (
     <section id="contact" className="section-gap px-6">
       <div className="max-w-6xl mx-auto">
@@ -48,7 +88,7 @@ export default function Contact() {
               <AnimateIn key={icon} direction="left" delay={i * 100}>
                 <GlassCard className="p-6 flex items-center gap-5 glass-card-glow">
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:scale-110"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 hover:scale-110"
                     style={{ background: "rgba(99,102,241,0.15)" }}
                   >
                     <span
@@ -79,7 +119,7 @@ export default function Contact() {
           {/* Contact form */}
           <AnimateIn direction="right" delay={150}>
             <GlassCard className="p-8 glass-card-glow">
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label className="font-label text-xs text-[#908fa0] uppercase tracking-wider block mb-2">
@@ -87,6 +127,8 @@ export default function Contact() {
                     </label>
                     <input
                       type="text"
+                      name="name"
+                      required
                       placeholder="Your name"
                       className="w-full rounded-lg px-4 py-3 text-sm text-[#dae2fd] outline-none transition-all duration-200 placeholder:text-[#464554] focus:scale-[1.01]"
                       style={{
@@ -103,6 +145,8 @@ export default function Contact() {
                     </label>
                     <input
                       type="email"
+                      name="email"
+                      required
                       placeholder="your@email.com"
                       className="w-full rounded-lg px-4 py-3 text-sm text-[#dae2fd] outline-none transition-all duration-200 placeholder:text-[#464554] focus:scale-[1.01]"
                       style={{
@@ -121,6 +165,8 @@ export default function Contact() {
                   </label>
                   <input
                     type="text"
+                    name="subject"
+                    required
                     placeholder="How can I help?"
                     className="w-full rounded-lg px-4 py-3 text-sm text-[#dae2fd] outline-none transition-all duration-200 placeholder:text-[#464554] focus:scale-[1.01]"
                     style={{
@@ -138,6 +184,8 @@ export default function Contact() {
                   </label>
                   <textarea
                     rows={5}
+                    name="message"
+                    required
                     placeholder="Tell me about your project..."
                     className="w-full rounded-lg px-4 py-3 text-sm text-[#dae2fd] outline-none transition-all duration-200 placeholder:text-[#464554] resize-none"
                     style={{
@@ -151,11 +199,16 @@ export default function Contact() {
 
                 <button
                   type="submit"
+                  disabled={isSending}
                   className="btn-primary w-full flex items-center justify-center gap-2"
-                  style={{ animation: "none" }}
+                  style={{
+                    animation: "none",
+                    opacity: isSending ? 0.7 : 1,
+                    cursor: isSending ? "not-allowed" : "pointer",
+                  }}
                 >
                   <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>send</span>
-                  Send Message
+                  {isSending ? "Sending..." : "Send Message"}
                 </button>
               </form>
             </GlassCard>

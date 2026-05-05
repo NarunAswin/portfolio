@@ -226,6 +226,18 @@ body {
 }
 .glass-card-glow {
   position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease,
+    background 0.3s ease;
+}
+.glass-card-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  border-color: rgba(129, 140, 248, 0.35);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.12),
+    rgba(14, 165, 233, 0.08)
+  );
 }
 .glass-card-glow::before {
   content: "";
@@ -254,3 +266,159 @@ body {
   80%, 100% { transform: scale(2.2); opacity: 0; }
 }
 .ping-slow { animation: ping-slow 2.5s ease-out infinite; }
+
+/* Ambient background system */
+.ambient-grid {
+  position: absolute;
+  inset: -10%;
+  background-image:
+    linear-gradient(rgba(137, 206, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(137, 206, 255, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at center, black 20%, transparent 80%);
+  opacity: 0.25;
+  animation: grid-pan 30s linear infinite;
+}
+
+@keyframes grid-pan {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-56px, -56px, 0); }
+}
+
+.ambient-spotlight {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.25) 0%,
+    rgba(14, 165, 233, 0.12) 35%,
+    transparent 75%
+  );
+  filter: blur(10px);
+  transition: left 0.4s ease, top 0.4s ease;
+}
+
+.ambient-particle {
+  position: absolute;
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(192, 193, 255, 0.75);
+  box-shadow: 0 0 14px rgba(137, 206, 255, 0.6);
+  animation: float-particle 12s ease-in-out infinite;
+}
+
+.ambient-particle.p1 { top: 14%; left: 9%; animation-delay: 0s; }
+.ambient-particle.p2 { top: 28%; left: 86%; animation-delay: 1.2s; }
+.ambient-particle.p3 { top: 48%; left: 14%; animation-delay: 2.4s; }
+.ambient-particle.p4 { top: 64%; left: 82%; animation-delay: 3.6s; }
+.ambient-particle.p5 { top: 76%; left: 34%; animation-delay: 4.8s; }
+.ambient-particle.p6 { top: 18%; left: 58%; animation-delay: 6s; }
+
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(-18px) scale(1.25);
+    opacity: 0.95;
+  }
+}
+
+/* Magnetic-style buttons */
+.magnetic-btn {
+  position: relative;
+  transform-origin: center;
+  transition: transform 220ms ease, filter 220ms ease;
+}
+.magnetic-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  filter: brightness(1.06);
+}
+
+.arrow-slide {
+  transition: transform 220ms ease;
+}
+.btn-primary:hover .arrow-slide {
+  transform: translateX(4px);
+}
+
+/* Hero letter gather animation */
+@keyframes letter-gather {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--tx, 0), var(--ty, 42px), 0)
+      scale(0.62) rotate(var(--rot, 10deg));
+    filter: blur(12px);
+  }
+  52% {
+    opacity: 1;
+    transform: translate3d(0, -12px, 0) scale(1.1) rotate(-3deg);
+    filter: blur(0px);
+  }
+  72% {
+    transform: translate3d(0, 6px, 0) scale(0.97) rotate(1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    filter: blur(0px);
+  }
+}
+
+.hero-letter {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+  opacity: 0;
+  animation: letter-gather 1150ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Initial mirror reflection for hero name */
+.intro-name-wrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.name-mirror {
+  margin-top: 0.12em;
+  font-size: 0.58em;
+  line-height: 1;
+  opacity: 0;
+  transform: scaleY(-1);
+  transform-origin: top center;
+  background: linear-gradient(
+    to bottom,
+    rgba(192, 193, 255, 0.45),
+    rgba(137, 206, 255, 0.16),
+    rgba(137, 206, 255, 0)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: blur(0.3px);
+  animation: mirror-in 950ms ease-out 280ms forwards,
+    mirror-out 1200ms ease-in 1800ms forwards;
+}
+
+@keyframes mirror-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scaleY(-1);
+  }
+  to {
+    opacity: 0.52;
+    transform: translateY(0) scaleY(-1);
+  }
+}
+
+@keyframes mirror-out {
+  from { opacity: 0.52; }
+  to { opacity: 0.06; }
+}

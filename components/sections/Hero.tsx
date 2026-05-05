@@ -5,6 +5,21 @@ import { useEffect, useRef } from "react";
 
 export default function Hero() {
   const blobRef = useRef<HTMLDivElement>(null);
+  const firstName = "Narun Aswin Kannan";
+  const lastName = "Kannan";
+
+  const getScatterStyle = (index: number, startDelay: number) => {
+    // Deterministic pseudo-random values for stable SSR/CSR rendering.
+    const tx = ((index * 37) % 120) - 60;
+    const ty = ((index * 53) % 90) - 45;
+    const rot = ((index * 29) % 36) - 18;
+    return {
+      animationDelay: `${startDelay + index * 55}ms`,
+      ["--tx" as string]: `${tx}px`,
+      ["--ty" as string]: `${ty}px`,
+      ["--rot" as string]: `${rot}deg`,
+    } as React.CSSProperties;
+  };
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -82,9 +97,29 @@ export default function Hero() {
           className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] animate-fade-up delay-100 opacity-0"
           style={{ animationFillMode: "forwards" }}
         >
-          <span className="text-[#dae2fd]">Narun Aswin</span>
+          <span className="text-[#dae2fd] inline-flex flex-wrap justify-center">
+            {firstName.split("").map((char, i) => (
+              <span
+                key={`first-${i}-${char}`}
+                className={`hero-letter ${char === " " ? "w-[0.35em]" : ""}`}
+                style={getScatterStyle(i, 120)}
+              >
+                {char === " " ? "\u00A0" : char}
+              </span>
+            ))}
+          </span>
           <br />
-          <span className="gradient-text-animated cursor-blink">Kannan</span>
+          <span className="gradient-text-animated cursor-blink inline-flex flex-wrap justify-center">
+            {lastName.split("").map((char, i) => (
+              <span
+                key={`last-${i}-${char}`}
+                className="hero-letter"
+                style={getScatterStyle(i + firstName.length, 520)}
+              >
+                {char}
+              </span>
+            ))}
+          </span>
         </h1>
 
         {/* Subtitle */}
@@ -101,11 +136,11 @@ export default function Hero() {
           className="mt-10 flex flex-wrap items-center justify-center gap-4 animate-fade-up delay-300 opacity-0"
           style={{ animationFillMode: "forwards" }}
         >
-          <Link href="/#projects" className="btn-primary flex items-center gap-2">
+          <Link href="/#projects" className="btn-primary magnetic-btn flex items-center gap-2">
             View Projects
-            <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>arrow_forward</span>
+            <span className="material-symbols-outlined arrow-slide" style={{ fontSize: "18px" }}>arrow_forward</span>
           </Link>
-          <Link href="/#contact" className="btn-ghost">
+          <Link href="/#contact" className="btn-ghost magnetic-btn">
             Contact Me
           </Link>
         </div>
