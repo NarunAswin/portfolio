@@ -1,24 +1,14 @@
 import { HTMLAttributes } from "react";
 
-interface GlassCardProps extends HTMLAttributes<HTMLDivElement> {
-  hover?: boolean;
-}
+interface GlassCardProps extends HTMLAttributes<HTMLDivElement> {}
 
 export default function GlassCard({
   children,
   className = "",
-  hover = false,
   ...props
 }: GlassCardProps) {
   return (
-    <div
-      className={`glass-card ${
-        hover
-          ? "transition-all duration-300"
-          : ""
-      } ${className}`}
-      {...props}
-    >
+    <div className={`glass-card ${className}`} {...props}>
       {children}
     </div>
   );

@@ -6,8 +6,8 @@ const projects = [
   {
     title: "Istana ERP",
     description:
-      "Enterprise Resource Planning system built for scalability and real-time operational tracking.",
-    stack: ["React", "PostgreSQL", "Node.js"],
+      "A complete factory ERP built on three core modules—Production, Finance, and HRMS—delivering end-to-end management for manufacturing operations.",
+    stack: ["Next.js", "Prisma", "PostgreSQL", "shadcn/ui", "Cursor"],
     href: "/projects/istana-erp",
     icon: "inventory_2",
     accent: "#6366f1",
@@ -16,7 +16,7 @@ const projects = [
     title: "Legal-AI",
     description:
       "AI-powered assistant for legal document analysis and automated case law research.",
-    stack: ["Next.js", "OpenAI", "FastAPI"],
+    stack: ["Next.js", "Python", "FastAPI", "PostgreSQL"],
     href: "/projects/legal-ai",
     icon: "history_edu",
     accent: "#0ea5e9",
@@ -24,8 +24,8 @@ const projects = [
   {
     title: "Sustainability Platform",
     description:
-      "Monitoring tool for corporate sustainability goals and carbon footprint tracking.",
-    stack: ["React", "D3.js", "Supabase"],
+      "A marketing-focused static website with AI-powered responses that calculate and guide users through an ESG navigator for sustainability insights.",
+    stack: ["Next.js", "Sanity.io"],
     href: "/projects/sustainability-platform",
     icon: "eco",
     accent: "#22c55e",
@@ -33,7 +33,7 @@ const projects = [
   {
     title: "Hussmaan",
     description:
-      "Logistics and inventory management portal for industrial refrigeration solutions.",
+      "Built for a door manufacturing company—a quoting system to generate custom door quotes with integrated 3D door visualization and configuration.",
     stack: ["TypeScript", "Material UI", "Vercel"],
     href: "/projects/hussmaan",
     icon: "local_shipping",
@@ -60,13 +60,10 @@ export default function Projects() {
               direction={i % 2 === 0 ? "left" : "right"}
               delay={i * 100}
             >
-              <GlassCard
-                hover
-                className="p-8 flex flex-col gap-5 relative overflow-hidden h-full glass-card-glow"
-              >
+              <GlassCard className="p-8 flex flex-col gap-5 relative overflow-hidden h-full">
                 {/* Accent glow */}
                 <div
-                  className="absolute inset-0 opacity-5 pointer-events-none transition-opacity duration-300 group-hover:opacity-10"
+                  className="absolute inset-0 opacity-5 pointer-events-none"
                   style={{
                     background: `radial-gradient(circle at 10% 10%, ${accent} 0%, transparent 60%)`,
                   }}
@@ -76,7 +73,7 @@ export default function Projects() {
                   {/* Icon + title */}
                   <div className="flex items-start gap-4 mb-4">
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:scale-110"
+                      className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                       style={{ background: `${accent}18`, border: `1px solid ${accent}30` }}
                     >
                       <span
@@ -104,11 +101,11 @@ export default function Projects() {
                   {/* CTA */}
                   <Link
                     href={href}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#c0c1ff] hover:text-white transition-colors group/link"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#c0c1ff]"
                   >
                     View Case Study
                     <span
-                      className="material-symbols-outlined transition-transform duration-200 group-hover/link:translate-x-1"
+                      className="material-symbols-outlined"
                       style={{ fontSize: "16px" }}
                     >
                       arrow_forward

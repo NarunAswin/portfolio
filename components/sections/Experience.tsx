@@ -2,11 +2,14 @@ import GlassCard from "@/components/ui/GlassCard";
 import AnimateIn from "@/components/ui/AnimateIn";
 
 const bullets = [
-  "Architected complex UI modules using Next.js and Tailwind CSS, focusing on performance and responsiveness.",
-  "Developed a library of reusable React components to standardize design across enterprise applications.",
-  "Integrated secure RESTful APIs to facilitate real-time data synchronization.",
-  "Performed Scrum Master duties using Azure Boards, streamlining team communication and sprint delivery.",
-  "Managed CI/CD pipelines and deployment onto Vercel and VPS environments for zero-downtime releases.",
+  "Architected responsive and scalable UI modules using Next.js, React.js, TypeScript, and Tailwind CSS with a focus on performance and modern user experience.",
+  "Developed reusable React and shadcn/ui component libraries to standardize design systems across enterprise applications.",
+  "Built and integrated RESTful APIs using Python, FastAPI, and SQL to support real-time data synchronization and backend operations.",
+  "Managed source control and collaborative development workflows using Git, GitHub, Azure Repos, and Azure Boards.",
+  "Performed Scrum Master responsibilities including sprint planning, task tracking, and agile coordination using Azure Boards.",
+  "Managed deployment workflows, domain configuration, and hosting environments using Hostinger, GoDaddy, and Namecheap.",
+  "Utilized AI-powered development tools such as Cursor, Claude, and Antigravity to improve development efficiency and debugging workflows.",
+  "Configured CI/CD pipelines and handled deployments across Vercel and VPS environments for reliable production releases.",
 ];
 
 export default function Experience() {
@@ -34,7 +37,7 @@ export default function Experience() {
           </div>
 
           <AnimateIn direction="left" delay={100} className="ml-6">
-            <GlassCard className="p-8 glass-card-glow">
+            <GlassCard className="p-8">
               {/* Header */}
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-6">
                 <div>
@@ -54,7 +57,7 @@ export default function Experience() {
                     color: "#c0c1ff",
                   }}
                 >
-                  2024 – Present
+                  March 2025 – Present
                 </div>
               </div>
 

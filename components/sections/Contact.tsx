@@ -86,9 +86,9 @@ export default function Contact() {
           <div className="space-y-4">
             {contactInfo.map(({ icon, label, value, href }, i) => (
               <AnimateIn key={icon} direction="left" delay={i * 100}>
-                <GlassCard className="p-6 flex items-center gap-5 glass-card-glow">
+                <GlassCard className="p-6 flex items-center gap-5">
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 hover:scale-110"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                     style={{ background: "rgba(99,102,241,0.15)" }}
                   >
                     <span
@@ -103,7 +103,7 @@ export default function Contact() {
                     {href ? (
                       <a
                         href={href}
-                        className="text-[#dae2fd] font-medium hover:text-[#c0c1ff] transition-colors"
+                        className="text-[#dae2fd] font-medium"
                       >
                         {value}
                       </a>
@@ -118,7 +118,7 @@ export default function Contact() {
 
           {/* Contact form */}
           <AnimateIn direction="right" delay={150}>
-            <GlassCard className="p-8 glass-card-glow">
+            <GlassCard className="p-8">
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
